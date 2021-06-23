@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder> {
@@ -67,6 +69,18 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
         viewHolder.brand_name.setText(people.get(i).getProduct_brand());
 
+        viewHolder.item_image.setImageResource(R.drawable.car1);
+        String text=viewHolder.brand_name.getText().toString().trim();
+        text=text.replaceAll(" ","");
+        System.out.println("text"+text);
+        String url="https://ayushmawasthi.000webhostapp.com/"+text+".png";
+        Glide.with(viewHolder.item_image.getContext())
+                .load(url)
+                .placeholder(R.drawable.car1)
+                .into(viewHolder.item_image);
+        viewHolder.item_image.getLayoutParams().height = 150;
+
+
         if(people.get(i).getProduct_name().equals("shirt"))
         {
             //viewHolder.item_image.setImageResource(R.drawable.shirt);
@@ -80,6 +94,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
+
         return people.size();
     }
 }

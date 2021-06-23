@@ -11,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 class UserHomeAdapter1 extends RecyclerView.Adapter<UserHomeAdapter1.ViewHolder>  {
     private ArrayList<String> product;
     ItemClicked activity;
+    ImageView imageView;
 
     public interface ItemClicked
     {
@@ -68,7 +71,17 @@ class UserHomeAdapter1 extends RecyclerView.Adapter<UserHomeAdapter1.ViewHolder>
         holder.tv1.setText(product.get(position));
         holder.itempic.setImageResource(R.drawable.car1);
 
+//        holder.itempic.setImageDrawable(null);
 
+        String text=holder.tv1.getText().toString().trim();
+        text=text.replaceAll(" ","");
+        System.out.println("text"+text);
+        String url="https://ayushmawasthi.000webhostapp.com/"+text+".png";
+        Glide.with(holder.itempic.getContext())
+                .load(url)
+                .placeholder(R.drawable.car1)
+                .into(holder.itempic);
+        holder.itempic.getLayoutParams().height = 150;
 
     }
 

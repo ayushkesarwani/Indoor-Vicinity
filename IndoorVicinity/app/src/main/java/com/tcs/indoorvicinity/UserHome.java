@@ -89,6 +89,9 @@ public class UserHome extends AppCompatActivity implements UserHomeAdapter1.Item
         searchbutton=findViewById(R.id.userhomesearchbutton);
         t1temp=findViewById(R.id.temp1);
 
+//        productview=findViewById(R.id.userhomeimg1);
+
+
         t1temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

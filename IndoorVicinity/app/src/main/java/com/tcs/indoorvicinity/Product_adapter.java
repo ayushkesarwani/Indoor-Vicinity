@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class Product_adapter extends RecyclerView.Adapter<Product_adapter.ViewHolder> {
@@ -61,6 +63,15 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.ViewHo
         holder.tv2.setText(product.get(position).getProduct_brand());
         holder.tv3.setText(product.get(position).getProduct_discount()+"% off");
         holder.itempic.setImageResource(R.drawable.car1);
+
+        String text=holder.tv1.getText().toString().trim();
+        text=text.replaceAll(" ","");
+        System.out.println("text"+text);
+        String url="https://ayushmawasthi.000webhostapp.com/"+text+".png";
+        Glide.with(holder.itempic.getContext())
+                .load(url)
+                .placeholder(R.drawable.car1)
+                .into(holder.itempic);
 
 
 
