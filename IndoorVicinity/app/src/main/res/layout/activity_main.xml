@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
+    android:background="#000000"
 
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/leftView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -41,10 +43,11 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/rightView"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/landing_page"
+        android:background="@drawable/landing_page2"
         android:orientation="vertical">
 
         <TextView
