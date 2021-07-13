@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
         animate.setFillAfter(true);
         view.startAnimation(animate);
 
-
-
-
-
     }
 
     public void slideRight(View view){
@@ -105,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
 
         t1.setAnimation(topanim);
         t2.setAnimation(topanim);
-//        vendor_text.setAnimation(leftanim);
-//        cust_text.setAnimation(rightanim);
+        vendor_text.setAnimation(leftanim);
+        cust_text.setAnimation(rightanim);
     }
 
 
