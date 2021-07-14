@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Vendor_add_item extends AppCompatActivity {
+public class Vendor_add_item extends AppCompatActivity implements Product_adapter.ItemClicked {
     RecyclerView recyclerView;
     RecyclerView.Adapter myAdapter;
     RecyclerView.LayoutManager layoutManager;
@@ -29,6 +29,7 @@ public class Vendor_add_item extends AppCompatActivity {
     ImageButton add,myacount;
     String shopid;
     String responsefromphp;
+    String productToDelete="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,5 +135,57 @@ public class Vendor_add_item extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         fetchdata();
+    }
+
+    @Override
+    public void onItemClicked(String index, String s1) {
+        System.out.println("print"+index);
+        productToDelete=index;
+        delete();
+
+    }
+
+    private void delete() {
+        //TODO add url
+        StringRequest request=new StringRequest(Request.Method.POST, "http://inroute.onlinewebshop.net/vendor_delete_item.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(Vendor_add_item.this, response, Toast.LENGTH_SHORT).show();
+                // System.out.println("12322123344"+response);
+
+                System.out.println(response);
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
+
+
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.d("Login", "Error: " + error
+                        + "\nStatus Code " + error.networkResponse.statusCode
+                        + "\nResponse Data " + error.networkResponse.data
+                        + "\nCause " + error.getCause()
+                        + "\nmessage" + error.getMessage());
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>params=new HashMap<>();
+                params.put("product",productToDelete);
+                return params;
+            }
+        };
+        Volley.newRequestQueue(this).add(request);
+
+
+
+
     }
 }

@@ -16,6 +16,7 @@
         android:elevation="20dp"
         app:cardElevation="30dp"
         app:cardCornerRadius="10dp"
+        android:visibility="gone"
         android:outlineAmbientShadowColor="#033FFF"
         android:outlineSpotShadowColor="#017CF3">
         <LinearLayout

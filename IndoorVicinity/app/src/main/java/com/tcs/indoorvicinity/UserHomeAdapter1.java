@@ -49,8 +49,6 @@ class UserHomeAdapter1 extends RecyclerView.Adapter<UserHomeAdapter1.ViewHolder>
                     activity.onItemClicked(product.indexOf((String)v.getTag()),"product");
 
 
-
-
                 }
             });
         }

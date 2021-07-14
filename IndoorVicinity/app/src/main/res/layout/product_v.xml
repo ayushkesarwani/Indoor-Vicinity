@@ -79,6 +79,7 @@
             android:text="Remove"
             android:textColor="#EA0909"
             android:gravity="center"
+            android:id="@+id/btn_vendor_delete"
             android:textStyle="bold"
             android:layout_gravity="end|center_vertical"
 
