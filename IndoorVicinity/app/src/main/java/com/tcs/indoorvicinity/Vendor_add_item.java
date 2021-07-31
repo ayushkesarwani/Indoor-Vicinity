@@ -146,7 +146,7 @@ public class Vendor_add_item extends AppCompatActivity implements Product_adapte
     }
 
     private void delete() {
-        //TODO add url
+        
         StringRequest request=new StringRequest(Request.Method.POST, "http://inroute.onlinewebshop.net/vendor_delete_item.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -157,8 +157,6 @@ public class Vendor_add_item extends AppCompatActivity implements Product_adapte
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
-
-
 
 
 
@@ -183,8 +181,6 @@ public class Vendor_add_item extends AppCompatActivity implements Product_adapte
             }
         };
         Volley.newRequestQueue(this).add(request);
-
-
 
 
     }

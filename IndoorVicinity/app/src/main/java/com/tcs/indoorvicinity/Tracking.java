@@ -77,7 +77,6 @@ public class Tracking extends AppCompatActivity implements SensorEventListener {
         {
             sensorManager.registerListener(Tracking.this,accelerometer,SensorManager.SENSOR_DELAY_NORMAL);
 
-
         }
         else
         {
@@ -110,10 +109,6 @@ public class Tracking extends AppCompatActivity implements SensorEventListener {
             Toast.makeText(this, "Step Detector sensor Not supported", Toast.LENGTH_SHORT).show();
 
         }
-
-
-
-
     }
 
     @Override
@@ -143,7 +138,6 @@ public class Tracking extends AppCompatActivity implements SensorEventListener {
         {
             SensorManager.getRotationMatrix(rotationmatrix,null,lastacc,lastmag);
             SensorManager.getOrientation(rotationmatrix,orientation);
-
             String path [] =hs.get(start+shop).split(" ");
             if(Glob_Counter<path.length) {
                 String i = path[Glob_Counter];
@@ -152,43 +146,53 @@ public class Tracking extends AppCompatActivity implements SensorEventListener {
                 int direction = Integer.parseInt(m[0]);
 
                 float azimuthIRadians=orientation[0];
-                float azimuthInDegree= (float) Math.toDegrees(azimuthIRadians)+direction;
+                float azimuthInDegree= -(float) Math.toDegrees(azimuthIRadians);
+                azimuthInDegree+=direction;
+             /*   if(azimuthInDegree<0)
+                {
+                    azimuthInDegree+=direction;
 
+                }
+                else
+                {
+                    azimuthInDegree-=(180-direction);
+                }
 
-                RotateAnimation rotateAnimation=new RotateAnimation(currentDegree,-azimuthInDegree, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+              */
+                RotateAnimation rotateAnimation=new RotateAnimation(currentDegree,azimuthInDegree, Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
                 rotateAnimation.setDuration(250);
                 rotateAnimation.setFillAfter(true);
                 img.startAnimation(rotateAnimation);
-                currentDegree=-azimuthInDegree;
+                currentDegree=azimuthInDegree;
                 lastUpdatedTime=System.currentTimeMillis();
                 t2.setText(azimuthInDegree+"deg");
-                cuurentdegree1=(int)azimuthInDegree;
 
+                if(azimuthInDegree>0)
+                {
+                    cuurentdegree1=(int)azimuthInDegree;
+                }
+                else {
+                    cuurentdegree1 = 360 + (int) azimuthInDegree;
+                }
                 int stepstowalk = Integer.parseInt(m[1]);
-                int diff = cuurentdegree1 ;
-                if (diff < 20 && diff > -20) {
+                int diff = (int) cuurentdegree1 ;
+                if (diff < 20 || diff > 340) {
                     t3.setText("Move Straight");
-
-                } else if (diff > 20) {
+                } else if (diff > 20 && diff <180) {
                     t3.setText("Move Left");
-                } else if (diff < -20) {
+                } else if (diff < 340) {
                     t3.setText("Move Right");
                 }
-                t4.setText("Steps left to walk "+stepstowalk+" --> "+"In "+direction+" degrees --->  "+"\nDifference in degree "+diff+" --> "+"\nOur current degree is "+cuurentdegree1);
-
+                t4.setText("Steps left to walk "+stepstowalk+" --> "+"In "+direction+" degrees --->  "+"\nDifference in degree "+diff+" --> "+"\n Degree is postive "+cuurentdegree1);
+                t4.setText("Steps left to walk "+stepstowalk+" --> "+"In "+direction+" degrees --->  "+"\nDifference in degree "+diff+" --> "+"\n Degree is postive "+cuurentdegree1);
                 if (curstep > stepstowalk - 3) {
                     Glob_Counter++;
-
                 }
             }
             else
             {
                 t3.setText("You have successfully reached");
             }
-
-
-
-
         }
         String path [] =hs.get(start+shop).split(" ");
         if(Glob_Counter<path.length) {
@@ -197,16 +201,17 @@ public class Tracking extends AppCompatActivity implements SensorEventListener {
             String m[] = i.split("_");
             int direction = Integer.parseInt(m[0]);
             int stepstowalk = Integer.parseInt(m[1]);
-            int diff = cuurentdegree1 - direction;
-            if (diff < 20 && diff > -20) {
+            int diff = cuurentdegree1;
+            if (diff < 20 || diff > 340) {
                 t3.setText("Move Straight");
 
-            } else if (diff > 20) {
+            } else if (diff > 20 && diff<180) {
                 t3.setText("Move Left");
-            } else if (diff < -20) {
+            } else if (diff < 340) {
                 t3.setText("Move Right");
             }
-            t4.setText("Steps left to walk "+stepstowalk+" --> "+"In "+direction+" degrees --->  "+"\nDifference in degree "+diff+" --> "+"\nOur current degree is "+cuurentdegree1);
+
+            t4.setText("Steps left to walk "+stepstowalk+" --> "+"In "+direction+" degrees --->  "+"\nDifference in degree "+diff+" --> "+"\nDegree in Positive "+cuurentdegree1);
 
             if (curstep > stepstowalk - 3) {
                 Glob_Counter++;

@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvsteps"
+        android:textStyle="bold"
         android:text="Steps"
         android:layout_marginBottom="20dp"/>
     <ImageView
@@ -42,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/move"
+        android:textStyle="bold"
         android:text="Where to move"
         android:layout_marginBottom="20dp"/>
     <TextView
@@ -49,7 +51,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/howleft"
         android:text="How much left"/>
-
-
-
 </LinearLayout>
